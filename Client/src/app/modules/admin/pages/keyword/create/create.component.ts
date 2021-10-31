@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { KeywordService } from 'app/services/keyword.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -13,7 +14,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private location: Location,
     private keywordService: KeywordService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class CreateComponent implements OnInit {
             nzTitle: `Info`,
             nzContent: res.message
           });
+          this.router.navigateByUrl('/admin/keyword');
         } else {
           this.modal.error({
             nzTitle: `Error`,

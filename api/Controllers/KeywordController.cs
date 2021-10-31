@@ -32,6 +32,7 @@ namespace api.Controllers
                     if(isExists)
                     {
                         response = new ResponseModel() { Code = 400, Message = Constants.ERROR_MESSAGE.KEYWORD_EXISTS };
+                        return Ok(response);
                     }
 
                     var keywordDto = await _repoWrapper.KeywordRepository.AddKeyword(model.Value, model.DocumentIds, Guid.Parse(UserID));

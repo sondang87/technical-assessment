@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KeywordService } from 'app/services/keyword.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -15,7 +15,8 @@ export class EditComponent implements OnInit {
     private keywordService: KeywordService,
     private modal: NzModalService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { 
     if(route.snapshot.paramMap.get('keywordId')) {
       this.keywordId = route.snapshot.paramMap.get('keywordId');
@@ -33,6 +34,7 @@ export class EditComponent implements OnInit {
             nzTitle: `Info`,
             nzContent: res.message
           });
+          this.router.navigateByUrl('/admin/keyword');
         } else {
           this.modal.error({
             nzTitle: `Error`,

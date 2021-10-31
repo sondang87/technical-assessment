@@ -37,9 +37,7 @@ export class AddEditKeywordComponent implements OnInit, OnDestroy {
       value: ['', Validators.required],
       documentIds: []
     });
-  }
 
-  ngAfterViewChecked() {
     if(this.keywordId) {
       this.getKeywordById();
     }
@@ -96,11 +94,14 @@ export class AddEditKeywordComponent implements OnInit, OnDestroy {
       this.getKeywordSub = this.keywordService.get(this.keywordId).subscribe(res => {
         if(res) {
           this.form.patchValue(res);
-          this.documents.forEach(data => {
-            if(res.documentIds && res.documentIds.includes(data.documentId))
-              data.checked = true;
+          this.getDocSub = this.docService.getSuggestedDocs(res.value).subscribe(docs => {
+            this.documents = docs;
+            this.documents.forEach(data => {
+              if(res.documentIds && res.documentIds.includes(data.documentId))
+                data.checked = true;
+            });
           });
-          this.refreshStatus();
+          
         }
       });
     }
