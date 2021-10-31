@@ -10,7 +10,6 @@ namespace Services
     {
         private readonly DatabaseContext _context;
         private readonly IMapper _mapper;
-        private IUserRepository _userRepository;
         private IKeywordRepository _keywordRepository;
         private IDocumentRepository _documentRepository;
         private IDocumentKeywordRepository _docKeyRepository;
@@ -24,19 +23,6 @@ namespace Services
         public async Task<int> SaveChange()
         {
             return await _context.SaveChangesAsync();
-        }
-
-        public IUserRepository UserRepository
-        {
-            get
-            {
-                if(_userRepository == null)
-                {
-                    _userRepository = new UserRepository(_context, _mapper);
-                }
-
-                return _userRepository;
-            }
         }
 
         public IKeywordRepository KeywordRepository
