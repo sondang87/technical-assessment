@@ -1,0 +1,42 @@
+<div nz-row>
+    <div nz-col nzSpan="12">
+        <h4 class="mandatory">Fields with * mark are mandatory</h4>
+        <form nz-form [formGroup]="form">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6">Keyword <span class="mandatory">*</span></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input type="text" formControlName="value" placeholder="Keyword Value"
+                        (change)="validateKeyword()">
+                    <div class="mandatory" *ngIf="invalidKeyword">Keyword already exists</div>
+                </nz-form-control>
+            </nz-form-item>
+
+            <h4>Select document(s) to map with the keyword</h4>
+            <div *ngIf="documents && documents.length > 0">
+                <nz-table #rowSelectionTable [nzData]="documents" (nzCurrentPageDataChange)="currentPageDataChange($event)"
+                    (nzPageIndexChange)="refreshStatus()" (nzPageSizeChange)="refreshStatus()">
+                    <thead>
+                        <tr>
+                            <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                                (nzCheckedChange)="checkAll($event)"></th>
+                            <th>Document Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of rowSelectionTable.data">
+                            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+                            <td>{{data.documentName}}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+            <nz-form-item>
+                <nz-form-control [nzSpan]="12">
+                    <button nz-button nzType="primary" [disabled]="!form.valid" (click)="saveChanges()">Save</button>
+                    <button class="ml-1" nz-button nzType="default" nzDanger (click)="cancel()">Cancel</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</div>

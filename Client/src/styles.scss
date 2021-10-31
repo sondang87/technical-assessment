@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+.d-flex {
+    display: flex;
+}
+
+.justify-content-flex-end{
+    justify-content: flex-end;
+}
+
+.mb-1{
+    margin-bottom: 1rem;
+}
+
+.ml-1{
+    margin-left: 1rem;
+}
+
+nz-upload .ant-upload.ant-upload-drag {
+    text-align: left !important;
+    cursor: auto;
+    border: none;
+}
+.mandatory{
+    color: red;
+    font-weight: normal;
+}
+
+.ant-tabs-content {
+    height: 100% !important;
+}
+
+body {
+    font-size: 9pt !important;
+}
+.ant-table, .ant-table tr td, .ant-menu, .ant-tabs, .ant-tabs-tab, .ant-picker-input > input, .ant-form-item-label > label, .ant-layout * {
+    font-size: 9pt;
+}
+
+.ant-upload-btn {
+    padding: 0px !important;
+}

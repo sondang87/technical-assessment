@@ -1,0 +1,24 @@
+<nz-table #basicTable [nzData]="listOfData" nzSize="small">
+    <thead>
+      <tr>
+        <th style="width: 30px">#</th>
+        <th *ngFor="let column of tableHeaderColumns; let i = index"
+         [class.hide]="!column.isVisible" [nzSortOrder]="column.sortOrder" 
+         [nzSortFn]="column.sortFn" [nzSortDirections]="column.sortDirections">
+            {{ column.name }}
+        </th>
+        <th *ngIf="tableActions.length > 0">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data; index as i" (dblclick)="onRowDblClick(data)">
+            <td>{{ i+1 }}</td>
+            <td *ngFor="let prop of tableHeaderColumns" [class.hide]="!prop.isVisible">{{ data[prop.bindingModel] }} </td>
+            <td *ngIf="tableActions.length > 0">
+                <button nz-button nzType="default" *ngIf="tableActions.includes(tableAction.View)" (click)="onRowAction(tableAction.View, data)"><i nz-icon nzType="eye"></i></button>
+                <button nz-button nzType="default" *ngIf="tableActions.includes(tableAction.Edit)" (click)="onRowAction(tableAction.Edit, data)"><i nz-icon nzType="edit"></i></button>
+                <button nz-button nzType="default" *ngIf="tableActions.includes(tableAction.Delete)" (click)="onRowAction(tableAction.Delete, data)"><i nz-icon nzType="delete"></i></button>
+            </td>
+        </tr>
+    </tbody>
+  </nz-table>

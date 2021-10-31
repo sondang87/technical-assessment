@@ -1,0 +1,53 @@
+@import '../var';
+// Variables
+$innerCircleDiam: $circleDiam/3;
+$rotatingCircleDiam: $circleDiam/5;
+$innerCirclePos: ($circleDiam - $innerCircleDiam)/2;
+$rotatingCirclePosLeft: ($circleDiam - $innerCircleDiam)/2 - $rotatingCircleDiam;
+$rotatingCirclePosTop: $circleDiam/2 - $rotatingCircleDiam/2;
+.loading__overlay {
+    background-color: rgba(255, 255, 255, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: $priority-loading-overlay;
+    display: block;
+    &--0 {
+        display: none;
+    }
+    //The circle wrapper
+    &__spinner {
+        text-indent: 999em;
+        width: $circleDiam;
+        height: $circleDiam;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin: -$circleDiam/2;
+        background-color: #888;
+        box-shadow: 0 2px 1px rgba(0, 0, 0, .3) inset;
+        border-radius: 50%;
+        // The inner, rotating circle
+        &:after {
+            content: '';
+            position: absolute;
+            top: $rotatingCirclePosTop;
+            left: $rotatingCirclePosLeft;
+            background-color: #fff;
+            height: $rotatingCircleDiam;
+            width: $rotatingCircleDiam;
+            animation: spin 1s linear infinite;
+            border-radius: 50%;
+            transform-origin: $innerCirclePos/2 + $rotatingCircleDiam;
+        }
+    }
+}
+
+// Spin it!
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
